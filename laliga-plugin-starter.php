@@ -3,9 +3,9 @@
 $WPTEST_current_folder = dirname(__FILE__);
 if(!defined('DS')) define('DS', DIRECTORY_SEPARATOR);
 if(!defined('WPTEST_DIR')) define('WPTEST_DIR', $WPTEST_current_folder.DS);
-define('WPTEST_FILE', WPTEST_DIR.'wordpress-plugin-test.php');
-require_once(WPTEST_DIR.'wordpress-plugin-register.php');
-require_once(WPTEST_DIR.'WordPressCron.php');
-require_once(WPTEST_DIR.'WordPressLaLiga.php');
-require_once(WPTEST_DIR.'simple_html_dom.php');
+define('WPTEST_FILE', WPTEST_DIR.'laliga-plugin-jornadas.php');
+require_once(WPTEST_DIR.'laliga-plugin-register.php');
+require_once(WPTEST_DIR.'laliga-plugin-cron.php');
+require_once(WPTEST_DIR.'laliga-plugin-controller.php');
+require_once(WPTEST_DIR.'lib'.DIRECTORY_SEPARATOR.'simple_html_dom.php');
 ?>

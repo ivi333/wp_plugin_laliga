@@ -1,20 +1,20 @@
 <?php
 /*
-Plugin Name: Dummy Test Plugin
+Plugin Name: La Liga Resultados
 Plugin URI: https://todo.com
-Description: Dummy Test Purpose
+Description: Resultados Liga Española
 Version: 1.0
 Author: Ivan Gomez
 Author URI: https://todo.com
 License: GPLv2 or later
-Text Domain: dummytest
+Text Domain: laligaresultados
 */
 
 // Restrict direct file access
 if(preg_match('#' . basename(__FILE__) . '#', $_SERVER['PHP_SELF'])) { die('You are not allowed to call this page directly.'); }
 
 // Plugin starter
-require_once(dirname(__FILE__).DIRECTORY_SEPARATOR.'wordpress-plugin-starter.php');
+require_once(dirname(__FILE__).DIRECTORY_SEPARATOR.'laliga-plugin-starter.php');
 
 function add_query_vars_filter( $vars ){
     $vars[] = "week";
@@ -82,9 +82,9 @@ function my_task_function() {
     fclose($fp);
 }
 
-add_filter( 'cron_schedules', 'WordPressCron::my_cron_schedules' );
-WordPressCron::enableCron();
-add_action ( 'my_task_hook', ['WordPressCron','my_task_function' ]);
+add_filter( 'cron_schedules', 'LaLigaCron::my_cron_schedules' );
+LaLigaCron::enableCron();
+add_action ( 'my_task_hook', ['LaLigaCron','my_task_function' ]);
 
 register_activation_hook(WPTEST_FILE, array( 'wp_pt_registerhook', 'activation' ));
 register_deactivation_hook(WPTEST_FILE, array( 'wp_pt_registerhook', 'deactivation' ));
@@ -92,8 +92,8 @@ register_deactivation_hook(WPTEST_FILE, array( 'wp_pt_registerhook', 'deactivati
 add_shortcode('ivan-plugin-demo', 'ivan_wordpress_plugin_demo');
 add_filter( 'query_vars', 'add_query_vars_filter' );
 
-//WordPressLaLiga::getJornada("https://www.laliga.com/laliga-santander/resultados/2022-23/jornada-1");
-WordPressLaLiga::getAllJornadas(
+//LaLigaController::getJornada("https://www.laliga.com/laliga-santander/resultados/2022-23/jornada-1");
+LaLigaController::getAllJornadas(
     array
     (
         "https://www.laliga.com/laliga-santander/resultados/2022-23/jornada-1",

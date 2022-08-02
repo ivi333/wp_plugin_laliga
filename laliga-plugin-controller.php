@@ -1,6 +1,6 @@
 <?php if(preg_match('#' . basename(__FILE__) . '#', $_SERVER['PHP_SELF'])) { die('You are not allowed to call this page directly.'); } ?>
 <?php
-class WordPressLaLiga
+class LaLigaController
 {
 
     public function __construct () {
@@ -10,48 +10,18 @@ class WordPressLaLiga
         $res = array();
         $z=1;
         foreach ($urls as $url) {
-            echo "Parsing:" . $url . "<br/>";
-            $json_resp = WordPressLaLiga::getJornada ($url);
+            //echo "Parsing:" . $url . "<br/>";
+            $json_resp = LaLigaController::getJornada ($url);
             $res["jornada" . $z++]=$json_resp;
         }
-        
-        echo json_encode($res, JSON_UNESCAPED_UNICODE );        
+        //FOR DEBUG
+        //echo json_encode($res, JSON_UNESCAPED_UNICODE );
+
+        return json_encode($res, JSON_UNESCAPED_UNICODE);
     }
     
 
-    public static function getJornada ($url) {        
-        
-        /*$body = wp_remote_retrieve_body ($response);                
-        $string = <<<XML
-            <a>
-            <b>
-            <c>texto</c>
-            <c>cosas</c>
-            </b>
-            <d>
-            <c>código</c>
-            </d>
-            </a>
-            XML;
-            */
-        //$xpath = new DOMXpath($body);
-        //$xml = new SimpleXMLElement($string);
-        //$x = $xml->xpath("//body");
-        //$x = $xml->xpath("/a/b/c");
-        //error_log (print_r($x));
-
-        /*$doc = new DOMDocument();
-        $doc->loadHTML($body);
-        $sxml = simplexml_import_dom($doc);
-        $x = $sxml->xpath("//body");
-        //error_log (print_r($x));*/
-
-        /*$doc = new DOMDocument();
-        $doc->loadHTML($body);
-        $xpath = new DOMXPath($doc);
-        $x = $xpath->xpath("//body");
-        error_log ($x);*/
-
+    public static function getJornada ($url) {                
         //Comprobar que la url existe
         $response = wp_remote_get($url);
         $http_code = wp_remote_retrieve_response_code( $response );        
@@ -93,25 +63,23 @@ class WordPressLaLiga
                 array_push ($jornada, $encuentro);                
 
                 //echo $e->plaintext . "<br/>";
+                /* FOR DEBUG
                 echo "<pre>" . "Fila " . $z++ . "</pre>";
                 echo "fecha:" . $fecha . "<br/>";
                 echo "horario:" . $horario . "<br/>";
                 echo "partido:" . $partido . "<br/>";
                 echo "arbitro:" . $arbitro . "<br/>";
-                echo "operador:" . $operador . "<br/>";                
+                echo "operador:" . $operador . "<br/>"; 
+                */
             }
         }
-        /*echo "<pre>" . "Jornada 1 </pre>";
+        /* FOR DEBUG        
+        echo "<pre>" . "Jornada 1 </pre>";
         echo json_encode($jornada, JSON_UNESCAPED_UNICODE );
-        error_log (json_encode($jornada, JSON_UNESCAPED_UNICODE ));        */
-        return $jornada;
-        /*echo "size:" . count($html->find('table',1));
-        echo "<br/>";
-        foreach($html->find('table') as $e) 
-            echo $e->plaintext;
+        error_log (json_encode($jornada, JSON_UNESCAPED_UNICODE ));
         */
 
-        //echo $html->plaintext;
+        return $jornada;        
     }
 
     public static function simplehtmldom () {
