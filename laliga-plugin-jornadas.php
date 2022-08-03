@@ -103,4 +103,4 @@ add_filter( 'query_vars', 'add_query_vars_filter' );
 //LaLigaQuery::pluginActivation();
 //WordPressHttpContent::simplehtmldom();
 //LaLigaQuery::loadInitData();
-LaLigaController::reloadJornadas();
+//LaLigaController::reloadJornadas();

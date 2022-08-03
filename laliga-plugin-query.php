@@ -64,6 +64,7 @@ class LaLigaQuery
 
     public static function loadInitData () {
         //truncate + get data from service + save in DB
+        LaLigaController::reloadJornadas();
     }
 
     public static function saveJornada ($jornada_id, $jsonEncoded) {

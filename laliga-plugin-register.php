@@ -7,7 +7,7 @@ class wp_pt_registerhook
         error_log ("Plugin Activation Test Dummy!");      
         //$cron = new WordPressCron ();
         //$cron ->enableCron();  
-        LaLigaQuery::pluginActivation();
+        LaLigaQuery::pluginActivation();        
     }
 
     public static function deactivation()

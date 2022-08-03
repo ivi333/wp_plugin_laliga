@@ -6,19 +6,25 @@ class LaLigaController
 
     static function init () {
         //static initialization
-        LaLigaController::$urls_laliga =
+        /*LaLigaController::$urls_laliga =
         array
         (
             "https://www.laliga.com/laliga-santander/resultados/2022-23/jornada-1",
             "https://www.laliga.com/laliga-santander/resultados/2022-23/jornada-2"
-        );    
+        );*/    
+        
+        $tmp = array();
+        for ($i = 1; $i <= 38; $i++) {
+            array_push ($tmp, "https://www.laliga.com/laliga-santander/resultados/2022-23/jornada-" . $i);
+        }
+        LaLigaController::$urls_laliga = $tmp;
     }
-
 
     public static function reloadJornadas () {
         LaLigaQuery::truncateJornadas ();
         $z=1;
-        foreach (LaLigaController::$urls_laliga as $url) {            
+        foreach (LaLigaController::$urls_laliga as $url) {
+            error_log ("Processing " . $url);
             $json_resp = LaLigaController::getJornada ($url);
             if (isset($json_resp)) {                
                 LaLigaQuery::saveJornada($z++, json_encode($json_resp, JSON_UNESCAPED_UNICODE ));
