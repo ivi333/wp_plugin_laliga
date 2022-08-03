@@ -2,27 +2,46 @@
 <?php
 class LaLigaController
 {
+    static $urls_laliga = array ();
 
-    public function __construct () {
+    static function init () {
+        //static initialization
+        LaLigaController::$urls_laliga =
+        array
+        (
+            "https://www.laliga.com/laliga-santander/resultados/2022-23/jornada-1",
+            "https://www.laliga.com/laliga-santander/resultados/2022-23/jornada-2"
+        );    
     }
 
-    public static function getAllJornadas ($urls) { 
+
+    public static function reloadJornadas () {
+        LaLigaQuery::truncateJornadas ();
+        $z=1;
+        foreach (LaLigaController::$urls_laliga as $url) {            
+            $json_resp = LaLigaController::getJornada ($url);
+            if (isset($json_resp)) {                
+                LaLigaQuery::saveJornada($z++, json_encode($json_resp, JSON_UNESCAPED_UNICODE ));
+            }
+        }
+    }
+
+    public static function getAllJornadas () { 
         $res = array();
         $z=1;
-        foreach ($urls as $url) {
+        foreach ($urls_laliga as $url) {
             //echo "Parsing:" . $url . "<br/>";
             $json_resp = LaLigaController::getJornada ($url);
             $res["jornada" . $z++]=$json_resp;
         }
         //FOR DEBUG
-        //echo json_encode($res, JSON_UNESCAPED_UNICODE );
-
+        //echo json_encode($res, JSON_UNESCAPED_UNICODE);
         return json_encode($res, JSON_UNESCAPED_UNICODE);
     }
     
 
     public static function getJornada ($url) {                
-        //Comprobar que la url existe
+        //Check if url exists with wp_remote_get as file_get_html cannot verify it
         $response = wp_remote_get($url);
         $http_code = wp_remote_retrieve_response_code( $response );        
         $html = null;
@@ -30,11 +49,11 @@ class LaLigaController
             try {        
                 $html = file_get_html($url);
             } catch (\nThrowable  $t) {
-                //Exception not captured :(
+                //TODO If error occurs exception is never captured :(
                 echo 'Error captured:' . $t;            
             }
         } else {
-            return;
+            return null;
         }
 
         // find all table (index=0 means the first one)
@@ -42,15 +61,14 @@ class LaLigaController
         $z=0;
         $jornada = array();        
         foreach($table->find('tr') as $e) {
-            //Numero de columnas, discard rubbish
+            //Get table columns td, discard rubbish
             $size = count($e->find ('td'));
             if ($size > 1) {            
                 $fecha = $e->find('td', 1)->plaintext;
                 $horario = $e->find('td', 2)->plaintext;
                 $partido = $e->find('td', 4)->plaintext;
                 $arbitro = $e->find('td', 5)->plaintext;
-                $operador = $e->find('td', 6)->plaintext;
-                
+                $operador = $e->find('td', 6)->plaintext;                
                 $encuentro = 
                 [
                     "fecha" => str_replace("\n","", trim($fecha)),
@@ -58,8 +76,7 @@ class LaLigaController
                     "partido" => str_replace("\n","", trim($partido)),
                     "arbitro" => str_replace("\n","", trim($arbitro)),
                     "operador" => str_replace("\n","", trim($operador))
-                ];
-                
+                ];                
                 array_push ($jornada, $encuentro);                
 
                 //echo $e->plaintext . "<br/>";
@@ -119,4 +136,5 @@ class LaLigaController
 
 }
 
+LaLigaController::init();
 

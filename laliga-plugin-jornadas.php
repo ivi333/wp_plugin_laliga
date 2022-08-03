@@ -93,11 +93,14 @@ add_shortcode('ivan-plugin-demo', 'ivan_wordpress_plugin_demo');
 add_filter( 'query_vars', 'add_query_vars_filter' );
 
 //LaLigaController::getJornada("https://www.laliga.com/laliga-santander/resultados/2022-23/jornada-1");
-LaLigaController::getAllJornadas(
+/*LaLigaController::getAllJornadas(
     array
     (
         "https://www.laliga.com/laliga-santander/resultados/2022-23/jornada-1",
         "https://www.laliga.com/laliga-santander/resultados/2022-23/jornada-2"
     )
-);
+);*/
+//LaLigaQuery::pluginActivation();
 //WordPressHttpContent::simplehtmldom();
+//LaLigaQuery::loadInitData();
+LaLigaController::reloadJornadas();
