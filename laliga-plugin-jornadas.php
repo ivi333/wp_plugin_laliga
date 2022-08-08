@@ -21,33 +21,8 @@ function add_query_vars_filter( $vars ){
     return $vars;
 }
   
-function ivan_wordpress_plugin_demo($atts) {
-	$Content = "<style>\r\n";
-	$Content .= "h3.demoClass {\r\n";
-	$Content .= "color: #26b158;\r\n";
-	$Content .= "}\r\n";
-	$Content .= "</style>\r\n";
-	$Content .= '<h3 class="demoClass">Check it out!</h3>';
-    //error_log ("ivan wordpress plugin demo attrs:" . $atts);
-    echo "<pre > ID = " . get_query_var('week') . "</pre>";
-    return $Content;
-}
 
-//https://www.jnorton.co.uk/wordpress-tutorial-cron-jobs-scheduled-tasks
-
-/*function my_cron_schedules($schedules){
-    if(!isset($schedules["2min"])){
-        $schedules["2min"] = array(
-            'interval' => 2*60,
-            'display' => __('Once every 2 minutes'));
-    }
-    if(!isset($schedules["70sec"])){
-        $schedules["70sec"] = array(
-            'interval' => 70,
-            'display' => __('Once Every 70 seconds'));
-    }
-    return $schedules;
-}    
+//error_log("now is:" . date('d-m-y h:i:s'));
 
 function my_task_function() {
     error_log ('Cron Task Function has been called!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!');
@@ -57,41 +32,29 @@ function my_task_function() {
     fclose($fp);
 }
 
-//error_log ("disable_wp_cron:" . DISABLE_WP_CRON);
-//error_log (print_r(_get_cron_array()));
-//error_log ("time:" . time());
-
-error_log("now is:" . date('d-m-y h:i:s'));
-
-add_filter('cron_schedules','my_cron_schedules');
-if (!wp_next_scheduled('my_task_hook')) {
-    error_log ('Scheduling my_task_hook!!');
-    wp_schedule_event( time(), '2min', 'my_task_hook' );
-} else {
-    error_log ('my_task_hook was already scheduled!');
-}
-add_action ( 'my_task_hook', 'my_task_function');
-*/
-
-
-function my_task_function() {
-    error_log ('Cron Task Function has been called!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!');
-    $content = "some text here";
-    $fp = fopen("/tmp/myText.txt","wb");
-    fwrite($fp,$content);
-    fclose($fp);
+function registerCSS () {
+    wp_register_style('laliga_style', plugins_url('laliga.css',WPTEST_DIR.'css'.DS.'laliga.css'));
+    wp_enqueue_style('laliga_style');    
 }
 
+//Enable cron and fire function
 add_filter( 'cron_schedules', 'LaLigaCron::my_cron_schedules' );
 LaLigaCron::enableCron();
 add_action ( 'my_task_hook', ['LaLigaCron','my_task_function' ]);
 
+//Enable plugin start/stop
 register_activation_hook(WPTEST_FILE, array( 'wp_pt_registerhook', 'activation' ));
 register_deactivation_hook(WPTEST_FILE, array( 'wp_pt_registerhook', 'deactivation' ));
 
-add_shortcode('ivan-plugin-demo', 'ivan_wordpress_plugin_demo');
+//Enable read variables from request
+add_shortcode('laligaresultados', 'LaLigaLoadWidget::laliga_shortcode_int');
 add_filter( 'query_vars', 'add_query_vars_filter' );
 
+//Register scripts and css
+add_action('wp_enqueue_scripts', 'registerCSS');
+
+
+//DEBUG CALLS
 //LaLigaController::getJornada("https://www.laliga.com/laliga-santander/resultados/2022-23/jornada-1");
 /*LaLigaController::getAllJornadas(
     array

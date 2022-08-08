@@ -8,5 +8,6 @@ require_once(WPTEST_DIR.'laliga-plugin-register.php');
 require_once(WPTEST_DIR.'laliga-plugin-cron.php');
 require_once(WPTEST_DIR.'laliga-plugin-controller.php');
 require_once(WPTEST_DIR.'laliga-plugin-query.php');
+require_once(WPTEST_DIR.'laliga-plugin-loadwidget.php');
 require_once(WPTEST_DIR.'lib'.DIRECTORY_SEPARATOR.'simple_html_dom.php');
 ?>

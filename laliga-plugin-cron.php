@@ -2,6 +2,7 @@
 <?php
 class LaLigaCron
 {
+    //example: https://www.jnorton.co.uk/wordpress-tutorial-cron-jobs-scheduled-tasks
     public function __construct () {
 
     }
@@ -45,7 +46,6 @@ class LaLigaCron
         }
         return $schedules;
     }    
-    
 }
 
 ?>

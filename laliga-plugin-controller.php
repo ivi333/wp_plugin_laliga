@@ -5,14 +5,7 @@ class LaLigaController
     static $urls_laliga = array ();
 
     static function init () {
-        //static initialization
-        /*LaLigaController::$urls_laliga =
-        array
-        (
-            "https://www.laliga.com/laliga-santander/resultados/2022-23/jornada-1",
-            "https://www.laliga.com/laliga-santander/resultados/2022-23/jornada-2"
-        );*/    
-        
+        //static initialization        
         $tmp = array();
         for ($i = 1; $i <= 38; $i++) {
             array_push ($tmp, "https://www.laliga.com/laliga-santander/resultados/2022-23/jornada-" . $i);
@@ -35,7 +28,7 @@ class LaLigaController
     public static function getAllJornadas () { 
         $res = array();
         $z=1;
-        foreach ($urls_laliga as $url) {
+        foreach (LaLigaController::$urls_laliga as $url) {
             //echo "Parsing:" . $url . "<br/>";
             $json_resp = LaLigaController::getJornada ($url);
             $res["jornada" . $z++]=$json_resp;
@@ -45,7 +38,6 @@ class LaLigaController
         return json_encode($res, JSON_UNESCAPED_UNICODE);
     }
     
-
     public static function getJornada ($url) {                
         //Check if url exists with wp_remote_get as file_get_html cannot verify it
         $response = wp_remote_get($url);
@@ -54,7 +46,7 @@ class LaLigaController
         if ($http_code === 200) {
             try {        
                 $html = file_get_html($url);
-            } catch (\nThrowable  $t) {
+            } catch (Throwable  $t) {
                 //TODO If error occurs exception is never captured :(
                 echo 'Error captured:' . $t;            
             }
@@ -101,7 +93,6 @@ class LaLigaController
         echo json_encode($jornada, JSON_UNESCAPED_UNICODE );
         error_log (json_encode($jornada, JSON_UNESCAPED_UNICODE ));
         */
-
         return $jornada;        
     }
 
@@ -139,7 +130,6 @@ class LaLigaController
         // extract text from HTML
         echo $html->plaintext;
     }
-
 }
 
 LaLigaController::init();

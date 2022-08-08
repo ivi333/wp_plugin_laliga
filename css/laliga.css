@@ -1,0 +1,126 @@
+h3.demoClass {
+    color: #26b158;
+}
+
+.flexcontainer {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px 30px;		
+}
+
+.container {
+  border: solid 2px;
+  background: #ffffff;
+  margin-bottom: 1em;
+}	
+
+.item.laliga-jornadas {
+    /*background: #007ed3;*/
+    min-width: 100px;
+    /*border: solid 2px #305077;*/
+    margin: 5px;
+    text-align: left;
+    color: white;
+    font-weight: bold;
+    line-height: 1.4;
+    font-size: 24px;
+    font-weight:bold;
+}	
+
+.item.laliga-jornadas.extra{
+    flex-basis: auto;
+    flex-grow: 0.75;
+    flex-shrink: 0;		
+}
+
+.item.laliga-resultados {		
+    min-width: 170px;		
+    min-height: 70px;
+    /*border: solid 2px #305077;*/
+    margin: 5px;
+    text-align: left;
+    color: white;
+    font-weight: bold;
+    /*line-height: 2;*/
+    font-size: 24px;
+    font-weight:bold;		
+}	
+
+span.laliga-class {
+    color: red;	
+}
+
+span.success {
+    color: green;
+}	
+
+.select_partidos {
+    text-align: center;
+    border-radius: 10px;
+    padding: 0;		
+    border: 2px solid rgb(0 137 17);
+    color: #008911;
+    margin-top: 2px;
+}		
+
+.box {
+    position: relative;
+    border-top: 4px solid #ddd;    	
+    width: 100%;
+    box-shadow: 0 1px 1px rgba(0,0,0,0.1);
+    z-index: 300;		
+}
+
+.box.box-danger {
+    border-top-color: #dd4b39;
+}	
+
+.partido_jornada {
+    transition:all .2s ease-in-out;
+    margin-bottom:5px;
+    /*line-height:1;*/
+    background:rgb(118 217 211 / 80%);
+    padding:3px 0;
+    border-bottom:1px solid #eee;
+    border-left:1px solid #eee;
+    border-right:1px solid #eee;
+    border-radius: 15px;		
+}
+
+.partido_jornada:hover {
+    border-bottom:1px solid #6ca1cc;
+    border-left:1px solid #4886b8;
+    border-right:1px solid #4886b8;
+    box-shadow:0 0 10px #4886b8;
+}	
+
+.partido_jornada table {
+    border: none;
+    margin: 0px;
+}
+
+.partido_jornada table tr td {
+    border: none;
+}
+
+.partido_jornada * img {
+    max-width: fit-content;
+}
+
+.partido_jornada * span.horario {
+    font-size: 11px;
+}
+
+.partido_jornada * span.horario {
+    font-size: 11px;
+}
+
+.partido_jornada * span.horario strong::before {
+    content: "\00a0\00a0"; 
+}
+
+.partido_jornada * span.horario strong {
+    color: #114f47;
+}

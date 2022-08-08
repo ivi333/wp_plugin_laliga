@@ -4,20 +4,17 @@ class wp_pt_registerhook
 {
     public static function activation()
     {
-        error_log ("Plugin Activation Test Dummy!");      
+        error_log ("Plugin Activation LaLiga!");      
         //$cron = new WordPressCron ();
         //$cron ->enableCron();  
-        LaLigaQuery::pluginActivation();        
+        //LaLigaQuery::pluginActivation();        
     }
 
     public static function deactivation()
     {
-        error_log ("Plugin Dectivation Test Dummy!");
+        error_log ("Plugin Dectivation LaLiga!");
         LaLigaCron::disableCron();  
-        LaLigaQuery::pluginDeactivation();
-    }
-    public static function dummy () {
-        error_log ("registerhook dummy!!");
+        //LaLigaQuery::pluginDeactivation();
     }
 
 }

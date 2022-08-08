@@ -9,7 +9,7 @@ class LaLigaQuery
     public function __construct () {
 
     }
-
+    
     public static function pluginActivation () {
 		global $wpdb;
 		$prefix = $wpdb->prefix;
@@ -101,7 +101,6 @@ class LaLigaQuery
 		$result = $wpdb->get_var($sSql);
 		return $result;
 	}
-
 
     public static function pluginDeactivation () {
         global $wpdb;
