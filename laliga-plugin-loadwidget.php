@@ -2,20 +2,63 @@
 <?php
 class LaLigaLoadWidget {
 
-    public static function laliga_shortcode_int ($arr) {
 
-        /*$Content = "<style>\r\n";
-        $Content .= "h3.demoClass {\r\n";
-        $Content .= "color: #26b158;\r\n";
-        $Content .= "}\r\n";
-        $Content .= "</style>\r\n";*/
-        
-        $Content = '<h3 class="demoClass">Check it out 333!</h3>';
+    public static function laliga_shortcode_int_TEST () {
+        //echo "hello world <br/>";
+        $Content = '<i class="escudo-sprite c-a-osasuna"></i>';
+        $week = get_query_var('week');
+        if ($week == null) {
+            $week = 1;
+        }
+        $jornada = LaLigaQuery::getJornada ($week);
+        //echo ("jornada:" . $jornada);
+        //print_r ($jornada);
+        echo "Count:" . count($jornada) . "<br/>";
+        if (count($jornada) == 1) {
+            $resultados = $jornada[0]['resultados'];
+            $decode = json_decode($resultados, true);
+            foreach ($decode as $res) {
+                //print ($res['fecha'] . "<br/>");
+                print_r ($res);
+            }
+            //print_r ($decode[0]);
+            //print_r ($decode[1]);
+            //print ($decode[0]->{'fecha'});            
+            //foreach ($decode as $res ){
+                //foreach ($res as $key => $value) {
+                    //print ($key . "=" . $value . "<br/>");
+                //}
+                //print ($res->{'fecha'});
+                //print ("<br/>");
+            //}
+        }         
+        //$count = LaLigaQuery::jornadasCount ();
+        //echo ("Count:" . $count);
+        return $Content;
+    }
+
+    public static function laliga_shortcode_int () {        
         //error_log ("ivan wordpress plugin demo attrs:" . $atts);
-        echo "<pre > ID = " . get_query_var('week') . "</pre>";
-        $Content .=  '<div class="flexcontainer">';
+        //echo "<pre > ID = " . get_query_var('week') . "</pre>";
+
+        $week = get_query_var('week');
+        if ($week == null) {
+            $week = 1;
+        }
+        $jornada = LaLigaQuery::getJornada ($week);
+
+        if (count($jornada) == 1) {
+            $resultados = $jornada[0]['resultados'];
+            $jsonResultados = json_decode($resultados, true);
+            $numJornada = substr($jornada[0]['title'],7,1);
+        } else {
+            echo "Plugin not available <br/>";
+            return;
+        }
+
+        $Content =  '<div class="flexcontainer">';
             $Content .= '<div class="item laliga-jornadas extra">';
-                $Content .= 'JORNADA <span style="font-size:28px; font-weight:bold" class="success">1</span>';
+                $Content .= 'JORNADA <span style="font-size:28px; font-weight:bold" class="success">'.$numJornada.'</span>';
             $Content .= '</div>';
             $Content .= '<div class="item laliga-jornadas">';
                 $Content .= '<select class="form-control select select_partidos" onchange="#">';
@@ -26,32 +69,36 @@ class LaLigaLoadWidget {
             $Content .= '</div>';  	
         $Content .= '</div>';  	
         
-        //Load Jornadas Cards
+        //Load Jornadas Cards        
         $Content .= '<div class="container flexcontainer">';
+
+            //for ($i = 1; $i <= 10; $i++) {        
+            foreach ($jsonResultados as $res) {
             $Content .= '<div class="item laliga-resultados">';
                 $Content .= '<div style="padding:3px;cursor:pointer;">';
                     $Content .= '<a href="#" title="Alineaciones probables" style="text-decoration: none;">';
                     $Content .= '<div class="box box-danger partido_jornada">';
                         $Content .= '<table cellpadding="0" cellspacing="0" width="100%" border="0">';
                             $Content .= '<tr>';
-                                $Content .= '<td width="25%"><img src="https://www.comuniate.com/intranet/equipos/fotos/114_peq.jpg" alt="Osasuna" style="width:25px;"></td>';
-                                $Content .= '<td width="50%" style="text-align: center;">';
+                                $Content .= '<td width="20%"><img src="https://www.comuniate.com/intranet/equipos/fotos/114_peq.jpg" alt="Osasuna" style="width:25px;"></td>';
+                                $Content .= '<td width="60%" style="text-align: center;">';
                                     $Content .= '<span class="operador">';
                                         $Content .= '<img src="https://www.comuniate.com/images/tv/MOVISTAR.png" style="width:75px;">';
                                     $Content .= '</span>';
                                     $Content .= '<span class="horario">';
-                                        $Content .= 'VIE <strong>21:00</strong>';
+                                        $Content .= $res['fecha'].'<br/><strong>'.$res['horario'] .'</strong>';
                                     $Content .= '</span>';
                                 $Content .= '</td>';
-                                $Content .= '<td width="25%"><img src="https://www.comuniate.com/intranet/equipos/fotos/15_peq.jpg" alt="Sevilla" style="width:25px;"></td>';
+                                $Content .= '<td width="20%"><img src="https://www.comuniate.com/intranet/equipos/fotos/15_peq.jpg" alt="Sevilla" style="width:25px;"></td>';
                             $Content .= '</tr>';
                         $Content .= '</table>';
                     $Content .= '</div>';
                 $Content .= '</a>';
             $Content .= '</div>';
-            $Content .= '</div>';        
+            $Content .= '</div>';    
+            }    
         $Content .= '</div>';        
-
+        
         return $Content;
     
     }

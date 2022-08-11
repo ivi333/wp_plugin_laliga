@@ -76,6 +76,28 @@ class LaLigaQuery
         $wpdb->query($sql);
     }
 
+    public static function getJornada ($id = 1) {
+		global $wpdb;
+		$prefix = $wpdb->prefix;
+        //$table = "laliga_jornadas";
+        $arrRes = array();
+        $sSql = $wpdb->prepare("SELECT * FROM `".$prefix."laliga_jornadas` where `id` = %d", array($id));
+
+        //$sSql = $wpdb->prepare("SELECT * FROM `".$prefix."tinycarousel_image` where img_gal_id = %d and img_display = 'YES' ORDER BY rand()", array($id));
+
+        $arrRes = $wpdb->get_results($sSql, ARRAY_A);
+        return $arrRes;
+    }    
+
+    public static function jornadasCount () {
+        global $wpdb;
+        $prefix = $wpdb->prefix;
+        $result = 0;
+        $sSql = "SELECT COUNT(*) AS `count` FROM `".$prefix."laliga_jornadas`";
+        $result = $wpdb->get_var($sSql);
+        return $result;
+    }
+
     public static function truncateTable ($table) {
         global $wpdb;
 		$prefix = $wpdb->prefix;

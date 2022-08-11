@@ -34,7 +34,7 @@ function my_task_function() {
 
 function registerCSS () {
     wp_register_style('laliga_style', plugins_url('laliga.css',WPTEST_DIR.'css'.DS.'laliga.css'));
-    wp_enqueue_style('laliga_style');    
+    wp_enqueue_style('laliga_style');        
 }
 
 //Enable cron and fire function
@@ -55,6 +55,9 @@ add_action('wp_enqueue_scripts', 'registerCSS');
 
 
 //DEBUG CALLS
+//Load Image from plugin: 
+//esc_url(plugins_url( 'images/image.png', __FILE__ ));
+//'<img src="' .$img . '" width="300" height="300"> </img>';
 //LaLigaController::getJornada("https://www.laliga.com/laliga-santander/resultados/2022-23/jornada-1");
 /*LaLigaController::getAllJornadas(
     array

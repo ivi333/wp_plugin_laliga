@@ -1,6 +1,14 @@
-h3.demoClass {
-    color: #26b158;
+.box {
+    position: relative;
+    border-top: 4px solid #ddd;    	
+    width: 100%;
+    box-shadow: 0 1px 1px rgba(0,0,0,0.1);
+    z-index: 300;		
 }
+
+.box.box-danger {
+    border-top-color: #dd4b39;
+}	
 
 .flexcontainer {
     display: flex;
@@ -29,7 +37,7 @@ h3.demoClass {
     font-weight:bold;
 }	
 
-.item.laliga-jornadas.extra{
+.item.laliga-jornadas.extra {
     flex-basis: auto;
     flex-grow: 0.75;
     flex-shrink: 0;		
@@ -48,10 +56,6 @@ h3.demoClass {
     font-weight:bold;		
 }	
 
-span.laliga-class {
-    color: red;	
-}
-
 span.success {
     color: green;
 }	
@@ -65,17 +69,6 @@ span.success {
     margin-top: 2px;
 }		
 
-.box {
-    position: relative;
-    border-top: 4px solid #ddd;    	
-    width: 100%;
-    box-shadow: 0 1px 1px rgba(0,0,0,0.1);
-    z-index: 300;		
-}
-
-.box.box-danger {
-    border-top-color: #dd4b39;
-}	
 
 .partido_jornada {
     transition:all .2s ease-in-out;
@@ -113,14 +106,86 @@ span.success {
     font-size: 11px;
 }
 
-.partido_jornada * span.horario {
-    font-size: 11px;
-}
-
-.partido_jornada * span.horario strong::before {
+/*.partido_jornada * span.horario strong::before {
     content: "\00a0\00a0"; 
-}
+}*/
 
 .partido_jornada * span.horario strong {
-    color: #114f47;
+    color: #114f47;    
 }
+
+.prueba {
+    background-image: url('../images/seat.png');
+    width: 300px;
+    height: 300px;
+    background-size: cover;
+}
+
+
+/* Sprite */
+.escudo-sprite { 
+    display:block; 
+    background-image: url("../images/sprite-laliga.png"); 
+    background-size: 40px 2360px; 
+    width: 40px !important; 
+    height: 40px; 
+}
+.escudo-sprite { background-position: 0px -0px; }
+.escudo-sprite.ud-almeria { background-position: 0px -40px; }
+.escudo-sprite.atletico-de-madrid { background-position: 0px -80px; }
+.escudo-sprite.athletic-club { background-position: 0px -120px; }
+.escudo-sprite.fc-barcelona { background-position: 0px -160px; }
+.escudo-sprite.real-betis { background-position: 0px -200px; }
+.escudo-sprite.rc-celta { background-position: 0px -240px; }
+.escudo-sprite.elche-c-f { background-position: 0px -280px; }
+.escudo-sprite.rcd-espanyol { background-position: 0px -320px; }
+.escudo-sprite.getafe-cf { background-position: 0px -360px; }
+.escudo-sprite.granada-cf { background-position: 0px -400px; }
+.escudo-sprite.levante-ud { background-position: 0px -440px; }
+.escudo-spritealaga-cf { background-position: 0px -480px; }
+.escudo-sprite.c-a-osasuna { background-position: 0px -520px; }
+.escudo-sprite.rayo-vallecano { background-position: 0px -560px; }
+.escudo-sprite.real-madrid { background-position: 0px -600px; }
+.escudo-sprite.real-sociedad { background-position: 0px -640px; }
+.escudo-sprite.sevilla-fc { background-position: 0px -680px; }
+.escudo-sprite.valencia-cf { background-position: 0px -720px; }
+.escudo-sprite.r-valladolid-cf { background-position: 0px -760px; }
+.escudo-sprite.villarreal-cf { background-position: 0px -800px; }
+.escudo-sprite.d-alaves { background-position: 0px -840px; }
+.escudo-sprite.sd-eibar { background-position: 0px -880px; }
+.escudo-sprite.girona-fc { background-position: 0px -920px; }
+.escudo-sprite.ud-las-palmas { background-position: 0px -960px; }
+.escudo-sprite.cd-lugo { background-position: 0px -1000px; }
+.escudo-sprite.rcd-mallorca { background-position: 0px -1040px; }
+.escudo-spriteirandes { background-position: 0px -1080px; }
+.escudo-sprite.sd-ponferradina { background-position: 0px -1120px; }
+.escudo-sprite.real-sporting { background-position: 0px -1160px; }
+.escudo-sprite.cd-tenerife { background-position: 0px -1200px; }
+.escudo-sprite.real-zaragoza { background-position: 0px -1240px; }
+.escudo-sprite.albacete-bp { background-position: 0px -1280px; }
+.escudo-sprite.r-racing-club { background-position: 0px -1320px; }
+.escudo-sprite.burgos { background-position: 0px -1360px; }
+.escudo-sprite.cd-leganes { background-position: 0px -1400px; }
+.escudo-sprite.cartagena { background-position: 0px -1440px; }
+.escudo-sprite.sd-huesca { background-position: 0px -1480px; }
+.escudo-sprite.real-oviedo { background-position: 0px -1520px; }
+.escudo-sprite.cadiz-cf { background-position: 0px -1560px; }
+.escudo-sprite.levante-femenino { background-position: 0px -1600px; }
+.escudo-sprite.ud-granadilla-tenerife-egatesa { background-position: 0px -1640px; }
+.escudo-sprite.vcf-femenino { background-position: 0px -1680px; }
+.escudo-sprite.r-sociedad-femenino { background-position: 0px -1720px; }
+.escudo-sprite.at-madrid-femenino { background-position: 0px -1760px; }
+.escudo-sprite.sporting-huelva { background-position: 0px -1800px; }
+.escudo-sprite.athletic-femenino { background-position: 0px -1840px; }
+.escudo-sprite.fc-barcelona-femenino { background-position: 0px -1880px; }
+.escudo-sprite.villarreal-b { background-position: 0px -1920px; }
+.escudo-sprite.r-betis-feminas { background-position: 0px -1960px; }
+.escudo-sprite.sevilla-femenino { background-position: 0px -2000px; }
+.escudo-spriteadrid-cff { background-position: 0px -2040px; }
+.escudo-sprite.villarreal-cf-femenino { background-position: 0px -2080px; }
+.escudo-sprite.alhama-cf { background-position: 0px -2120px; }
+.escudo-sprite.levante-las-planas-fc { background-position: 0px -2160px; }
+.escudo-sprite.d-alaves-femenino { background-position: 0px -2200px; }
+.escudo-sprite.ud-ibiza-eivissa { background-position: 0px -2240px; }
+.escudo-sprite.fc-andorra { background-position: 0px -2280px; }
+.escudo-sprite.real-madrid-femenino { background-position: 0px -2320px; }
