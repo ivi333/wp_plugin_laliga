@@ -22,7 +22,6 @@ function add_query_vars_filter( $vars ){
     return $vars;
 }
   
-
 //error_log("now is:" . date('d-m-y h:i:s'));
 
 function my_task_function() {
@@ -34,8 +33,8 @@ function my_task_function() {
 }
 
 function registerCSS () {
-    wp_register_style('laliga_style', plugins_url('laliga.css',DIR.'css'.DS.'laliga.css'));
-    wp_enqueue_style('laliga_style');        
+    wp_register_style('word-league-soccer_style', plugins_url('word-league-soccer.css',WLST_WP_DIR.'css'.DS.'word-league-soccer.css'));
+    wp_enqueue_style('word-league-soccer_style');        
 }
 
 //Enable cron and fire function

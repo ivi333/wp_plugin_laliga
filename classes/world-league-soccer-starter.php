@@ -9,7 +9,7 @@ require_once(WLST_WP_DIR.'classes'.DIRECTORY_SEPARATOR.'world-league-soccer-cron
 require_once(WLST_WP_DIR.'classes'.DIRECTORY_SEPARATOR.'world-league-soccer-controller.php');
 require_once(WLST_WP_DIR.'classes'.DIRECTORY_SEPARATOR.'world-league-soccer-query.php');
 require_once(WLST_WP_DIR.'classes'.DIRECTORY_SEPARATOR.'world-league-soccer-loadwidget.php');
-require_once(WLST_WP_DIR.'classes'.DIRECTORY_SEPARATOR.'world-league-soccer-soccer.php');
+require_once(WLST_WP_DIR.'classes'.DIRECTORY_SEPARATOR.'world-league-soccer-soccerway.php');
 require_once(WLST_WP_DIR.'lib'.DIRECTORY_SEPARATOR.'simple_html_dom.php');
 
 ?>

@@ -1,11 +1,11 @@
 <?php if(preg_match('#' . basename(__FILE__) . '#', $_SERVER['PHP_SELF'])) { die('You are not allowed to call this page directly.'); } ?>
 <?php
-if ( !class_exists('wlsc_wp_Soccer') ) {
-    class wlsc_wp_Soccer {
+if ( !class_exists('wlsc_wp_SoccerWay') ) {
+    class wlsc_wp_SoccerWay {
 
         public static $BASE_URL = "https://es.soccerway.com/";
-
-        public static function loadTeams () {                          
+        
+        public function loadTeams () {                          
             $url = "https://es.soccerway.com/competitions/club-domestic/";
             $response = wp_remote_get(
                 $url, 
@@ -23,7 +23,7 @@ if ( !class_exists('wlsc_wp_Soccer') ) {
                         if ($z++>0) {
                             break;
                         }                        
-                        $id = wlsc_wp_Soccer::getTeamID ($e->href);
+                        $id = $this->getTeamID ($e->href);
                         echo (trim($e->plaintext) . ' = ' . $e->href . 'id=' . $id . '<br>');
                         sleep (2);
                     }
@@ -35,11 +35,11 @@ if ( !class_exists('wlsc_wp_Soccer') ) {
             }            
         }
 
-        public static function getTeamID ($url) {            
+        public function getTeamID ($url) {            
             $id="not_found";
             try {                
                 $response = wp_remote_get(
-                    wlsc_wp_Soccer::$BASE_URL . $url, 
+                    $this::$BASE_URL . $url, 
                     array( 
                         'method' => 'GET', 
                         'timeout' => 10, 
@@ -65,4 +65,5 @@ if ( !class_exists('wlsc_wp_Soccer') ) {
             return $id;
         }
     }
+    $soccer_way = new wlsc_wp_SoccerWay();
 }

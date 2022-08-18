@@ -3,11 +3,27 @@
 class wlsc_wp_LoadWidget {
 
 
-    public static function laliga_shortcode_int () {        
-        wlsc_wp_Soccer::loadTeams();
-        print ("<br/>");
-        _e ('Sesion','world-league-soccer');
-        return "";
+    public static function laliga_shortcode_int () {              
+        global $soccer_way;  
+        
+        //TODO Move to startup script 
+        //$soccer_way->loadTeams();
+        
+        //TODO get from param 
+        $teamId = 69323;
+
+        $week = get_query_var('week');
+        
+        $maxSesion=38;
+        if ($week != null && !empty($week)) {
+            $currentSesion=$week;
+        } else {
+            $currentSesion=1;
+        }
+                
+        //$soccer_way->fetchSesionTeam ();
+        
+        include_once( plugin_dir_path( __FILE__ ) . '../templates/world-league-soccer-template-table.php');        
     }
 
     public static function laliga_shortcode_int_OLD () {
@@ -99,7 +115,7 @@ class wlsc_wp_LoadWidget {
         
         $Content =  '<div class="flexcontainer">';
             $Content .= '<div class="item laliga-jornadas extra">';
-                $Content .= _e ('Sesion','world-league-soccer') . ' <span style="font-size:28px; font-weight:bold" class="success">'.$numJornada.'</span>';
+                $Content .= 'JORNADA <span style="font-size:28px; font-weight:bold" class="success">'.$numJornada.'</span>';
             $Content .= '</div>';
             $Content .= '<div class="item laliga-jornadas">';
                 $Content .= '<select class="form-control select select_partidos" onchange="#">';
