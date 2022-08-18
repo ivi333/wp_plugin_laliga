@@ -8,6 +8,7 @@ Author: Ivan Gomez
 Author URI: https://todo.com
 License: GPLv2 or later
 Text Domain: laligaresultados
+Domain Path: /lang
 */
 
 // Restrict direct file access
@@ -52,6 +53,13 @@ add_filter( 'query_vars', 'add_query_vars_filter' );
 
 //Register scripts and css
 add_action('wp_enqueue_scripts', 'registerCSS');
+
+// For localization
+function laliga_textdomain() 
+{
+	  load_plugin_textdomain( 'laligaresultados' , false, dirname( plugin_basename( __FILE__ ) ) . '/lang/' );
+}
+add_action('init', 'laliga_textdomain');
 
 
 //DEBUG CALLS

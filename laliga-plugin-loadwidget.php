@@ -3,7 +3,14 @@
 class LaLigaLoadWidget {
 
 
-    public static function laliga_shortcode_int_TEST () {
+    public static function laliga_shortcode_int () {        
+        LaLigaSoccer::loadTeams();
+        print ("<br/>");
+        _e ('Sesion','laligaresultados');
+        return "";
+    }
+
+    public static function laliga_shortcode_int_OLD () {
         //echo "hello world <br/>";
         $Content = '<i class="escudo-sprite c-a-osasuna"></i>';
         $week = get_query_var('week');
@@ -34,10 +41,44 @@ class LaLigaLoadWidget {
         }         
         //$count = LaLigaQuery::jornadasCount ();
         //echo ("Count:" . $count);
+
+
+        $url = "https://es.soccerway.com/a/block_competition_matches_summary?block_id=page_competition_1_block_competition_matches_summary_9&callback_params={\"page\":\"1\",\"block_service_id\":\"competition_summary_block_competitionmatchessummary\",\"round_id\":\"69450\",\"outgroup\":\"\",\"view\":\"1\",\"competition_id\":\"7\"}&action=changePage&params={\"page\":0}";
+        //$url = "https://es.soccerway.com/national/spain/primera-division/20222023/regular-season/r69450/";
+        $response = wp_remote_get(
+            $url, 
+            array( 
+                'method' => 'GET', 
+                'timeout' => 10, 
+                'redirection' => 5,
+                /*'httpversion' => '1.1',*/
+                /*'headers' => $http_args,*/
+                'body' => null,                
+                'cookies' => array() ) 
+            );
+
+        print("<br/>");
+        //print("<br/> is_wp_error:" . is_wp_error( $response ));
+        if( !is_wp_error( $response ) ) {
+            try {                
+                $json = json_decode($response['body']);
+                //echo json_encode($json, JSON_PRETTY_PRINT);                
+                $container = $json -> {'commands'}[0];
+                $content = $container->{'parameters'}->{'content'};
+                //print ($content);
+            } catch (Throwable  $t) {
+                echo 'Error captured:' . $t;
+            }
+        } else {
+            print ("remote_get_failed:" . $response->get_error_message());
+        }
+        
+        _e ('Sesion','laligaresultados');
+
         return $Content;
     }
 
-    public static function laliga_shortcode_int () {        
+    public static function laliga_shortcode_int_GOOD () {        
         //error_log ("ivan wordpress plugin demo attrs:" . $atts);
         //echo "<pre > ID = " . get_query_var('week') . "</pre>";
 
@@ -55,10 +96,10 @@ class LaLigaLoadWidget {
             echo "Plugin not available <br/>";
             return;
         }
-
+        
         $Content =  '<div class="flexcontainer">';
             $Content .= '<div class="item laliga-jornadas extra">';
-                $Content .= 'JORNADA <span style="font-size:28px; font-weight:bold" class="success">'.$numJornada.'</span>';
+                $Content .= _e ('Sesion','laligaresultados') . ' <span style="font-size:28px; font-weight:bold" class="success">'.$numJornada.'</span>';
             $Content .= '</div>';
             $Content .= '<div class="item laliga-jornadas">';
                 $Content .= '<select class="form-control select select_partidos" onchange="#">';

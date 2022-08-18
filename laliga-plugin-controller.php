@@ -93,6 +93,8 @@ class LaLigaController
         echo json_encode($jornada, JSON_UNESCAPED_UNICODE );
         error_log (json_encode($jornada, JSON_UNESCAPED_UNICODE ));
         */
+        
+
         return $jornada;        
     }
 
