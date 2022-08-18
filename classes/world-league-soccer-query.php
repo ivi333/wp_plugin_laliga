@@ -1,6 +1,6 @@
 <?php if(preg_match('#' . basename(__FILE__) . '#', $_SERVER['PHP_SELF'])) { die('You are not allowed to call this page directly.'); } ?>
 <?php
-class LaLigaQuery
+class wlsc_wp_Query
 {
 
     // Plugin tables		
@@ -17,7 +17,7 @@ class LaLigaQuery
 		$errors = array();
 		
 		// loading the sql file, load it and separate the queries
-		$sql_file = WPTEST_DIR.'sql'.DS.'la-liga-tbl.sql';		
+		$sql_file = WLST_WP_DIR.'sql'.DS.'la-liga-tbl.sql';		
 		$prefix = $wpdb->prefix;
         $handle = fopen($sql_file, 'r');
         $query = fread($handle, filesize($sql_file));
@@ -34,7 +34,7 @@ class LaLigaQuery
 		
 		// list the tables that haven't been created
         $missingtables=array();
-        foreach(LaLigaQuery::$array_tables_to_plugin as $table_name)
+        foreach(wlsc_wp_Query::$array_tables_to_plugin as $table_name)
 		{
 			if(strtoupper($wpdb->get_var("SHOW TABLES like  '". $prefix.$table_name . "'")) != strtoupper($prefix.$table_name))  
 			{
@@ -57,14 +57,14 @@ class LaLigaQuery
 		}
 		else
 		{
-            LaLigaQuery::loadInitData();
+            wlsc_wp_Query::loadInitData();
 		}
         return true;        
     }
 
     public static function loadInitData () {
         //truncate + get data from service + save in DB
-        LaLigaController::reloadJornadas();
+        wlsc_wp_Controller::reloadJornadas();
     }
 
     public static function saveJornada ($jornada_id, $jsonEncoded) {
@@ -102,7 +102,7 @@ class LaLigaQuery
         global $wpdb;
 		$prefix = $wpdb->prefix;
         //truncate tables
-        if (LaLigaQuery::hashData($table)) {
+        if (wlsc_wp_Query::hashData($table)) {
             //erase data
             $table_name = $prefix . $table;
             $truncate = "TRUNCATE TABLE  " . $table_name;
@@ -111,7 +111,7 @@ class LaLigaQuery
     }
 
     public static function truncateJornadas () {
-        LaLigaQuery::truncateTable ("laliga_jornadas");
+        wlsc_wp_Query::truncateTable ("laliga_jornadas");
     }
 
     public static function hashData($table)
@@ -128,7 +128,7 @@ class LaLigaQuery
         global $wpdb;
 		$prefix = $wpdb->prefix;
         // Plugin tables
-        foreach (LaLigaQuery::$array_tables_to_plugin as $table ) {
+        foreach (wlsc_wp_Query::$array_tables_to_plugin as $table ) {
             $table_name = $prefix . $table;
             $drop = "DROP TABLE IF EXISTS " . $table_name;
             $wpdb->query($drop);            

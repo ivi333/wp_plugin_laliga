@@ -1,3 +1,0 @@
-#: ../laliga-plugin-loadwidget.php:71
-msgid "Sesion"
-msgstr ""

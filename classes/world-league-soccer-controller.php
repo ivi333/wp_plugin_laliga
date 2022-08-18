@@ -1,6 +1,6 @@
 <?php if(preg_match('#' . basename(__FILE__) . '#', $_SERVER['PHP_SELF'])) { die('You are not allowed to call this page directly.'); } ?>
 <?php
-class LaLigaController
+class wlsc_wp_Controller
 {
     static $urls_laliga = array ();
 
@@ -10,17 +10,17 @@ class LaLigaController
         for ($i = 1; $i <= 38; $i++) {
             array_push ($tmp, "https://www.laliga.com/laliga-santander/resultados/2022-23/jornada-" . $i);
         }
-        LaLigaController::$urls_laliga = $tmp;
+        wlsc_wp_Controller::$urls_laliga = $tmp;
     }
 
     public static function reloadJornadas () {
-        LaLigaQuery::truncateJornadas ();
+        wlsc_wp_Query::truncateJornadas ();
         $z=1;
-        foreach (LaLigaController::$urls_laliga as $url) {
+        foreach (wlsc_wp_Controller::$urls_laliga as $url) {
             error_log ("Processing " . $url);
-            $json_resp = LaLigaController::getJornada ($url);
+            $json_resp = wlsc_wp_Controller::getJornada ($url);
             if (isset($json_resp)) {                
-                LaLigaQuery::saveJornada($z++, json_encode($json_resp, JSON_UNESCAPED_UNICODE ));
+                wlsc_wp_Query::saveJornada($z++, json_encode($json_resp, JSON_UNESCAPED_UNICODE ));
             }
         }
     }
@@ -28,9 +28,9 @@ class LaLigaController
     public static function getAllJornadas () { 
         $res = array();
         $z=1;
-        foreach (LaLigaController::$urls_laliga as $url) {
+        foreach (wlsc_wp_Controller::$urls_laliga as $url) {
             //echo "Parsing:" . $url . "<br/>";
-            $json_resp = LaLigaController::getJornada ($url);
+            $json_resp = wlsc_wp_Controller::getJornada ($url);
             $res["jornada" . $z++]=$json_resp;
         }
         //FOR DEBUG
@@ -134,5 +134,5 @@ class LaLigaController
     }
 }
 
-LaLigaController::init();
+wlsc_wp_Controller::init();
 

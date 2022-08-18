@@ -1,12 +1,12 @@
 <?php if(preg_match('#' . basename(__FILE__) . '#', $_SERVER['PHP_SELF'])) { die('You are not allowed to call this page directly.'); } ?>
 <?php
-class LaLigaLoadWidget {
+class wlsc_wp_LoadWidget {
 
 
     public static function laliga_shortcode_int () {        
-        LaLigaSoccer::loadTeams();
+        wlsc_wp_Soccer::loadTeams();
         print ("<br/>");
-        _e ('Sesion','laligaresultados');
+        _e ('Sesion','world-league-soccer');
         return "";
     }
 
@@ -17,7 +17,7 @@ class LaLigaLoadWidget {
         if ($week == null) {
             $week = 1;
         }
-        $jornada = LaLigaQuery::getJornada ($week);
+        $jornada = wlsc_wp_Query::getJornada ($week);
         //echo ("jornada:" . $jornada);
         //print_r ($jornada);
         echo "Count:" . count($jornada) . "<br/>";
@@ -39,7 +39,7 @@ class LaLigaLoadWidget {
                 //print ("<br/>");
             //}
         }         
-        //$count = LaLigaQuery::jornadasCount ();
+        //$count = wlsc_wp_Query::jornadasCount ();
         //echo ("Count:" . $count);
 
 
@@ -73,7 +73,7 @@ class LaLigaLoadWidget {
             print ("remote_get_failed:" . $response->get_error_message());
         }
         
-        _e ('Sesion','laligaresultados');
+        _e ('Sesion','world-league-soccer');
 
         return $Content;
     }
@@ -86,7 +86,7 @@ class LaLigaLoadWidget {
         if ($week == null) {
             $week = 1;
         }
-        $jornada = LaLigaQuery::getJornada ($week);
+        $jornada = wlsc_wp_Query::getJornada ($week);
 
         if (count($jornada) == 1) {
             $resultados = $jornada[0]['resultados'];
@@ -99,7 +99,7 @@ class LaLigaLoadWidget {
         
         $Content =  '<div class="flexcontainer">';
             $Content .= '<div class="item laliga-jornadas extra">';
-                $Content .= _e ('Sesion','laligaresultados') . ' <span style="font-size:28px; font-weight:bold" class="success">'.$numJornada.'</span>';
+                $Content .= _e ('Sesion','world-league-soccer') . ' <span style="font-size:28px; font-weight:bold" class="success">'.$numJornada.'</span>';
             $Content .= '</div>';
             $Content .= '<div class="item laliga-jornadas">';
                 $Content .= '<select class="form-control select select_partidos" onchange="#">';

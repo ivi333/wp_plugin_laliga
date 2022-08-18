@@ -1,7 +1,7 @@
 <?php if(preg_match('#' . basename(__FILE__) . '#', $_SERVER['PHP_SELF'])) { die('You are not allowed to call this page directly.'); } ?>
 <?php
-if ( !class_exists('LaLigaSoccer') ) {
-    class LaLigaSoccer {
+if ( !class_exists('wlsc_wp_Soccer') ) {
+    class wlsc_wp_Soccer {
 
         public static $BASE_URL = "https://es.soccerway.com/";
 
@@ -23,7 +23,7 @@ if ( !class_exists('LaLigaSoccer') ) {
                         if ($z++>0) {
                             break;
                         }                        
-                        $id = LaLigaSoccer::getTeamID ($e->href);
+                        $id = wlsc_wp_Soccer::getTeamID ($e->href);
                         echo (trim($e->plaintext) . ' = ' . $e->href . 'id=' . $id . '<br>');
                         sleep (2);
                     }
@@ -39,7 +39,7 @@ if ( !class_exists('LaLigaSoccer') ) {
             $id="not_found";
             try {                
                 $response = wp_remote_get(
-                    LaLigaSoccer::$BASE_URL . $url, 
+                    wlsc_wp_Soccer::$BASE_URL . $url, 
                     array( 
                         'method' => 'GET', 
                         'timeout' => 10, 

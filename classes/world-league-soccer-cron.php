@@ -1,6 +1,6 @@
 <?php if(preg_match('#' . basename(__FILE__) . '#', $_SERVER['PHP_SELF'])) { die('You are not allowed to call this page directly.'); } ?>
 <?php
-class LaLigaCron
+class wlsc_wp_Cron
 {
     //example: https://www.jnorton.co.uk/wordpress-tutorial-cron-jobs-scheduled-tasks
     public function __construct () {

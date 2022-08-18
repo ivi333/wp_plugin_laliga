@@ -1,13 +1,13 @@
 <?php
 /*
-Plugin Name: La Liga Resultados
+Plugin Name: Soccer World Leagues
 Plugin URI: https://todo.com
-Description: Resultados Liga Española
+Description: Show information about your prefered leagues around the world
 Version: 1.0
 Author: Ivan Gomez
 Author URI: https://todo.com
 License: GPLv2 or later
-Text Domain: laligaresultados
+Text Domain: world-league-soccer
 Domain Path: /lang
 */
 
@@ -15,7 +15,7 @@ Domain Path: /lang
 if(preg_match('#' . basename(__FILE__) . '#', $_SERVER['PHP_SELF'])) { die('You are not allowed to call this page directly.'); }
 
 // Plugin starter
-require_once(dirname(__FILE__).DIRECTORY_SEPARATOR.'laliga-plugin-starter.php');
+require_once(dirname(__FILE__).DIRECTORY_SEPARATOR.'classes'.DIRECTORY_SEPARATOR.'world-league-soccer-starter.php');
 
 function add_query_vars_filter( $vars ){
     $vars[] = "week";
@@ -34,21 +34,21 @@ function my_task_function() {
 }
 
 function registerCSS () {
-    wp_register_style('laliga_style', plugins_url('laliga.css',WPTEST_DIR.'css'.DS.'laliga.css'));
+    wp_register_style('laliga_style', plugins_url('laliga.css',DIR.'css'.DS.'laliga.css'));
     wp_enqueue_style('laliga_style');        
 }
 
 //Enable cron and fire function
-add_filter( 'cron_schedules', 'LaLigaCron::my_cron_schedules' );
-LaLigaCron::enableCron();
-add_action ( 'my_task_hook', ['LaLigaCron','my_task_function' ]);
+add_filter( 'cron_schedules', 'wlsc_wp_Cron::my_cron_schedules' );
+wlsc_wp_Cron::enableCron();
+add_action ( 'my_task_hook', ['wlsc_wp_Cron','my_task_function' ]);
 
 //Enable plugin start/stop
-register_activation_hook(WPTEST_FILE, array( 'wp_pt_registerhook', 'activation' ));
-register_deactivation_hook(WPTEST_FILE, array( 'wp_pt_registerhook', 'deactivation' ));
+register_activation_hook(WLST_WP_FILE, array( 'wp_pt_registerhook', 'activation' ));
+register_deactivation_hook(WLST_WP_FILE, array( 'wp_pt_registerhook', 'deactivation' ));
 
 //Enable read variables from request
-add_shortcode('laligaresultados', 'LaLigaLoadWidget::laliga_shortcode_int');
+add_shortcode('world-league-soccer', 'wlsc_wp_LoadWidget::laliga_shortcode_int');
 add_filter( 'query_vars', 'add_query_vars_filter' );
 
 //Register scripts and css
@@ -57,7 +57,7 @@ add_action('wp_enqueue_scripts', 'registerCSS');
 // For localization
 function laliga_textdomain() 
 {
-	  load_plugin_textdomain( 'laligaresultados' , false, dirname( plugin_basename( __FILE__ ) ) . '/lang/' );
+	  load_plugin_textdomain('world-league-soccer' , false, dirname( plugin_basename( __FILE__ ) ) . '/lang/' );
 }
 add_action('init', 'laliga_textdomain');
 
@@ -66,15 +66,15 @@ add_action('init', 'laliga_textdomain');
 //Load Image from plugin: 
 //esc_url(plugins_url( 'images/image.png', __FILE__ ));
 //'<img src="' .$img . '" width="300" height="300"> </img>';
-//LaLigaController::getJornada("https://www.laliga.com/laliga-santander/resultados/2022-23/jornada-1");
-/*LaLigaController::getAllJornadas(
+//wlsc_wp_Controller::getJornada("https://www.laliga.com/laliga-santander/resultados/2022-23/jornada-1");
+/*wlsc_wp_Controller::getAllJornadas(
     array
     (
         "https://www.laliga.com/laliga-santander/resultados/2022-23/jornada-1",
         "https://www.laliga.com/laliga-santander/resultados/2022-23/jornada-2"
     )
 );*/
-//LaLigaQuery::pluginActivation();
+//wlsc_wp_Query::pluginActivation();
 //WordPressHttpContent::simplehtmldom();
-//LaLigaQuery::loadInitData();
-//LaLigaController::reloadJornadas();
+//wlsc_wp_Query::loadInitData();
+//wlsc_wp_Controller::reloadJornadas();

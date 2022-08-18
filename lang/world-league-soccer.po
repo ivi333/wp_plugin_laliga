@@ -1,0 +1,3 @@
+#: ../classes/world-league-soccer-loadwidget:9
+msgid "Sesion"
+msgstr ""

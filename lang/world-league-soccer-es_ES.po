@@ -1,0 +1,3 @@
+#: ../classes/world-league-soccer-loadwidget.php:9
+msgid "Sesion"
+msgstr "Jornada"
