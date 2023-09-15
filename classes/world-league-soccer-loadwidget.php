@@ -20,8 +20,7 @@ class wlsc_wp_LoadWidget {
         } else {
             $currentSesion=1;
         }
-                
-        //$soccer_way->fetchSesionTeam ();
+        $soccer_way->fetchSesionTeam ($currentSesion);
         
         include_once( plugin_dir_path( __FILE__ ) . '../templates/world-league-soccer-template-table.php');        
     }
